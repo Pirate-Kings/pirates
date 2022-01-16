@@ -1,5 +1,4 @@
 import json
-from multiprocessing.pool import ThreadPool
 
 import click
 import httpx
@@ -10,7 +9,6 @@ GH_INFO = {
     "forks": None,
     "issues": "open_issues_count",
     "stars": "stargazers_count",
-    "tags": "topics",
     "watching": "subscribers_count",
 }
 
@@ -22,13 +20,15 @@ def main(kv):
     with open("repos.yml", "r") as f:
         RYML = yaml.safe_load(f)
 
+    clfa = RYML["clf"]
+
     for k, v in RYML["repos"].items():
         repo = f'https://github.com/{v["user"]}/{k}'
-        rl = v["links"]
-        rl = rl if rl else {}
+        rl = v.get("links", {})
         links = {"repo": repo, **rl}
         resp = httpx.get(f'https://api.github.com/repos/{v["user"]}/{k}').json()
 
+        clf = []
         info = {}
 
         for ghk, ghv in GH_INFO.items():
@@ -41,9 +41,17 @@ def main(kv):
                 if v["release"]:
                     links["dl"] = f'{repo}/releases'
 
+        rclf = v.get("clf")
+        if rclf:
+            for ck, cv in rclf.items():
+                for cvi in cv:
+                    clf.append(clfa[ck][cvi])
+
         op.append({
             "name": k,
             "links": links,
+            "clf": clf,
+            "tags": v.get("topics", []) + resp["topics"],
             **info
         })
 

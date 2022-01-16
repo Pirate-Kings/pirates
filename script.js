@@ -7,7 +7,12 @@ xhr.open("GET", "https://kv.whi-ne.workers.dev?key=pirate_kings", false);
 xhr.send(null);
 items = JSON.parse(xhr.response);
 
-stats_dict = {"stars": "/stargazers", "watching": "/watchers", "issues": "/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc", "forks": "/network/members"}
+stats_dict = {
+    "stars": "/stargazers",
+    "watching": "/watchers",
+    "issues": "/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc",
+    "forks": "/network/members"
+}
 
 window.onload = function () {
     var main = document.getElementById("main");
@@ -19,6 +24,7 @@ window.onload = function () {
         var links = document.createElement("div");
         var ls = document.createElement("span");
         var stats = document.createElement("div");
+        var clfs = document.createElement("div");
         var ss = document.createElement("span");
         var tags = document.createElement("div");
 
@@ -61,6 +67,14 @@ window.onload = function () {
             stats.append(stat);
         });
 
+        clfs.setAttribute("class", "rps");
+        for (var j of i["classifier"]) {
+            var clf = document.createElement("div");
+            clf.setAttribute("class", "rd-pill");
+            clf.innerText = j;
+            clfs.append(clf);
+        }
+
         tags.setAttribute("class", "rps");
         for (var j of i["tags"]) {
             var tag = document.createElement("div");
@@ -69,7 +83,17 @@ window.onload = function () {
             tags.append(tag);
         }
 
-        div.append(ta, h4, document.createElement("hr"), links, stats, document.createElement("hr"), tags);
+        div.append(
+            ta,
+            h4,
+            document.createElement("hr"),
+            links,
+            stats,
+            document.createElement("hr"),
+            clfs,
+            document.createElement("hr"),
+            tags
+        );
         main.append(div);
     }
 }

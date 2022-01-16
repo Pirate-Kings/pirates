@@ -1,22 +1,62 @@
+questionnaire:
+- At what platforms can your app run on?
+- What kind of media does your app download and/or give the users on-demand?
+- Can your app download the aforementioned media? How about giving it to the users on-demand?
+- Does your app gets some of the said media from a NSFW source?
+- Can your app be also used as a programming library?
+- Summarize what your app can do.
+
+clf:
+  os:
+    w: Windows
+    m: macOS
+    l: Linux
+    a: Android
+    i: iOS
+  t:
+    a: Anime
+    m: Manga
+  c:
+    d: download
+    o: on-demand
+  i:
+    c: CLI
+    g: GUI
+  f:
+    n: nsfw
+  fl:
+    p: programmatic
+
 repos:
   ani-cli:
-    links:
-    release: false
     user: pystardust
+    release: false
+    topics:
+      - gogoanime
+    clf:
+      os: [m, l]
+      t: [a]
+      c: [d, o]
+      i: [c]
   animdl:
-    links:
     release: false
     user: justfoolingaround
+  anime-downloader:
+    user: anime-dl
   kaa.si-cli:
-    links:
-    release: false
     user: Soviena
+    release: false
   MangDL:
+    user: MangDL
     links:
       site: https://mdl.pages.dev
     release: true
-    user: MangDL
+    clf:
+      os: [w, m, l]
+      t: [m]
+      c: [d]
+      i: [c]
+      fl: [p]
   yukino:
-    links:
     release: true
     user: yukino-app
