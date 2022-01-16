@@ -12,3 +12,7 @@ repos:
       site: https://mdl.pages.dev
     release: true
     user: MangDL
+  yukino:
+    links:
+    release: true
+    user: yukino-app
