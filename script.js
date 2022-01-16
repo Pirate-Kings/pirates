@@ -68,7 +68,7 @@ window.onload = function () {
         });
 
         clfs.setAttribute("class", "rps");
-        for (var j of i["classifier"]) {
+        for (var j of i["clf"]) {
             var clf = document.createElement("div");
             clf.setAttribute("class", "rd-pill");
             clf.innerText = j;
