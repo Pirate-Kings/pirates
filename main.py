@@ -5,7 +5,6 @@ import click
 import httpx
 import yaml
 
-SESSION = httpx.Client()
 GH_INFO = {
     "desc": "description",
     "forks": None,
@@ -29,7 +28,7 @@ def main(kv):
         rl = v["links"]
         rl = rl if rl else {}
         links = {"repo": repo, **rl}
-        resp = SESSION.get(f'https://api.github.com/repos/{v["user"]}/{k}').json()
+        resp = httpx.get(f'https://api.github.com/repos/{v["user"]}/{k}').json()
 
         info = {}
 
@@ -54,7 +53,7 @@ def main(kv):
         pool.close()
         pool.join()
 
-    SESSION.post(f'https://{kv}.whi-ne.workers.dev', json={"pirate_kings": json.dumps(op, indent=None)})
+    httpx.post(f'https://{kv}.whi-ne.workers.dev', json={"pirate_kings": json.dumps(op, indent=None)})
 
 if __name__ == '__main__':
     main()
