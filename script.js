@@ -2,39 +2,27 @@
 //     console.log(`${key} ${value}`);
 //  });
 
-items = [
-    {
-        "name": "ani-cli",
-        "desc": "A cli tool to browse and play anime.",
-        "tags": ["shell", "cli", "anime"],
-        "links": {
-            "repo": "https://github.com/pystardust/ani-cli/",
-        }
-    },
-    {
-        "name": "MangDL",
-        "desc": "The most inefficient downloader for PC (and soon, also a reader)",
-        "tags": ["python", "windows", "macos", "linux", "cli", "wordpress", "metadata", "scraper", "downloader", "zip", "tar", "rar", "manga", "provider", "reader", "cbr", "cbz", "cbt", "7zip", "cb7"],
-        "links": {
-            "site": "https://mdl.pages.dev",
-            "dl": "https://github.com/MangDL/MangDL/releases/latest",
-            "repo": "https://github.com/MangDL/MangDL",
-        }
-    },
-]
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://kv.whi-ne.workers.dev?key=pirate_kings", false);
+xhr.send(null);
+items = JSON.parse(xhr.response);
+
+stats_dict = {"stars": "/stargazers", "watching": "/watchers", "issues": "/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc", "forks": "/network/members"}
 
 window.onload = function () {
     var main = document.getElementById("main");
     for (var i of items) {
-        console.log(i);
         var div = document.createElement("div");
         var h3 = document.createElement("h3");
         var h4 = document.createElement("h4");
         var links = document.createElement("div");
         var ls = document.createElement("span");
+        var stats = document.createElement("div");
+        var ss = document.createElement("span");
         var tags = document.createElement("div");
         h3.innerText = i["name"];
         h4.innerText = i["desc"];
+
         links.setAttribute("class", "rps");
         ls.innerText = "Links: ";
         links.append(ls);
@@ -48,6 +36,26 @@ window.onload = function () {
             link.append(a);
             links.append(link);
         });
+
+        stats.setAttribute("class", "rps");
+        ss.innerText = "Stats: ";
+        stats.append(ss);
+        Object.entries(stats_dict).forEach(function([sk, sv]) {
+            var stat = document.createElement("div");
+            var a = document.createElement("a");
+            var img = document.createElement("img");
+
+            stat.setAttribute("class", "rd-pill");
+            img.setAttribute("class", "rpi");
+            img.src = `assets/images/icons/${sk}.png`;
+            a.setAttribute("target", "_blank");
+            a.setAttribute("class", "ss");
+            a.href = i["links"]["repo"] + sv;
+            a.innerText = i[sk];
+            stat.append(img, a);
+            stats.append(stat);
+        });
+
         tags.setAttribute("class", "rps");
         for (var j of i["tags"]) {
             var tag = document.createElement("div");
@@ -55,7 +63,8 @@ window.onload = function () {
             tag.innerText = j;
             tags.append(tag);
         }
-        div.append(h3, h4, links, tags);
+
+        div.append(h3, h4, links, stats, tags);
         main.append(div);
     }
 }

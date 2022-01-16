@@ -1,0 +1,10 @@
+repos:
+  ani-cli:
+    links:
+    release: false
+    user: pystardust
+  MangDL:
+    links:
+      site: https://mdl.pages.dev
+    release: true
+    user: MangDL
