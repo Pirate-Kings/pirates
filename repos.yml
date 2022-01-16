@@ -3,6 +3,10 @@ repos:
     links:
     release: false
     user: pystardust
+  animdl:
+    links:
+    release: false
+    user: justfoolingaround
   MangDL:
     links:
       site: https://mdl.pages.dev

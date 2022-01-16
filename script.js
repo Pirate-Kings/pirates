@@ -13,6 +13,7 @@ window.onload = function () {
     var main = document.getElementById("main");
     for (var i of items) {
         var div = document.createElement("div");
+        var ta = document.createElement("a");
         var h3 = document.createElement("h3");
         var h4 = document.createElement("h4");
         var links = document.createElement("div");
@@ -20,7 +21,10 @@ window.onload = function () {
         var stats = document.createElement("div");
         var ss = document.createElement("span");
         var tags = document.createElement("div");
+
+        ta.href = i["links"]["repo"];
         h3.innerText = i["name"];
+        ta.append(h3);
         h4.innerText = i["desc"];
 
         links.setAttribute("class", "rps");
@@ -46,6 +50,7 @@ window.onload = function () {
             var img = document.createElement("img");
 
             stat.setAttribute("class", "rd-pill");
+            stat.setAttribute("title", sk);
             img.setAttribute("class", "rpi");
             img.src = `assets/images/icons/${sk}.png`;
             a.setAttribute("target", "_blank");
@@ -64,7 +69,7 @@ window.onload = function () {
             tags.append(tag);
         }
 
-        div.append(h3, h4, links, stats, tags);
+        div.append(ta, h4, links, stats, tags);
         main.append(div);
     }
 }

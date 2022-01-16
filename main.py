@@ -38,9 +38,10 @@ def main(kv):
             dll = rl.get("dl")
             if dll:
                 links["dl"] = dll
-        else:
-            if v["release"]:
-                links["dl"] = f'{repo}/releases'
+            else:
+                if v["release"]:
+                    links["dl"] = f'{repo}/releases'
+                    print(links["dl"])
 
         op.append({
             "name": k,
