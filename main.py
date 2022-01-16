@@ -53,6 +53,7 @@ def main(kv):
         pool.close()
         pool.join()
 
+    print(f'https://{kv}.whi-ne.workers.dev')
     httpx.post(f'https://{kv}.whi-ne.workers.dev', json={"pirate_kings": json.dumps(op, indent=None)})
 
 if __name__ == '__main__':
