@@ -1,6 +1,7 @@
 import json
 from multiprocessing.pool import ThreadPool
 
+import click
 import httpx
 import yaml
 
@@ -13,8 +14,6 @@ GH_INFO = {
     "tags": "topics",
     "watching": "subscribers_count",
 }
-
-import click
 
 @click.command()
 @click.argument('kv')
