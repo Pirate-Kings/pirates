@@ -22,8 +22,7 @@ def main(kv):
     with open("repos.yml", "r") as f:
         RYML = yaml.safe_load(f)
 
-    def info(item):
-        k, v = item
+    for k, v in RYML["repos"].items():
         repo = f'https://github.com/{v["user"]}/{k}'
         rl = v["links"]
         rl = rl if rl else {}
@@ -41,18 +40,12 @@ def main(kv):
             else:
                 if v["release"]:
                     links["dl"] = f'{repo}/releases'
-                    print(links["dl"])
 
         op.append({
             "name": k,
             "links": links,
             **info
         })
-
-    with ThreadPool(20) as pool:
-        pool.map(info, RYML["repos"].items())
-        pool.close()
-        pool.join()
 
     httpx.post(f'https://{kv}.whi-ne.workers.dev', json={"pirate_kings": json.dumps(op, indent=None)})
 
