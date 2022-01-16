@@ -7,6 +7,10 @@ repos:
     links:
     release: false
     user: justfoolingaround
+  kaa.si-cli:
+    links:
+    release: false
+    user: Soviena
   MangDL:
     links:
       site: https://mdl.pages.dev
