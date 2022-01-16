@@ -21,4 +21,4 @@ jobs:
       env:
         KV: ${{ secrets.kv }}
       run: |
-        python main.py '${KV}'
+        python main.py $KV
