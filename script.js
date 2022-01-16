@@ -69,7 +69,7 @@ window.onload = function () {
             tags.append(tag);
         }
 
-        div.append(ta, h4, links, stats, tags);
+        div.append(ta, h4, document.createElement("hr"), links, stats, document.createElement("hr"), tags);
         main.append(div);
     }
 }
