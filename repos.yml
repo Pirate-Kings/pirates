@@ -13,7 +13,7 @@ clf:
     l: Linux
     a: Android
     i: iOS
-  t:
+  k:
     a: Anime
     m: Manga
   c:
@@ -22,6 +22,8 @@ clf:
   i:
     c: CLI
     g: GUI
+  t:
+    a: AniList
   f:
     n: nsfw
   fl:
@@ -35,17 +37,36 @@ repos:
       - gogoanime
     clf:
       os: [m, l]
-      t: [a]
+      k: [a]
       c: [d, o]
       i: [c]
   animdl:
-    release: false
     user: justfoolingaround
+    release: false
+    clf:
+      os: [w, m, l, a]
+      k: [a]
+      c: [d, o]
+      i: [c]
+      f: [n]
+      fl: [p]
   anime-downloader:
     user: anime-dl
+    clf:
+      os: [w, m, l, a]
+      k: [a]
+      c: [d, o]
+      i: [c, g]
+      fl: [p]
   kaa.si-cli:
     user: Soviena
     release: false
+    clf:
+      os: [w, m, l, a]
+      k: [a]
+      c: [o]
+      i: [c]
+      t: [a]
   MangDL:
     user: MangDL
     links:
@@ -53,10 +74,10 @@ repos:
     release: true
     clf:
       os: [w, m, l]
-      t: [m]
+      k: [m]
       c: [d]
       i: [c]
       fl: [p]
   yukino:
-    release: true
     user: yukino-app
+    release: true
