@@ -46,12 +46,13 @@ def main(kv):
             for ck, cv in rclf.items():
                 for cvi in cv:
                     clf.append(clfa[ck][cvi])
+        lt = [i.lower() for i in clf]
 
         op.append({
             "name": k,
             "links": links,
             "clf": clf,
-            "tags": v.get("topics", []) + resp["topics"],
+            "tags": [i for i in v.get("topics", []) + resp["topics"] if i.lower() not in lt],
             **info
         })
 

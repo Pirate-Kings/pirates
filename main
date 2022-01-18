@@ -1,0 +1,102 @@
+#!/usr/bin/env python3.10
+import os
+import shlex
+from pathlib import Path
+from subprocess import call
+
+import click
+import httpx
+
+import markdown_vars
+
+
+def run(s: str):
+    call(shlex.split(s))
+
+HTML_EXEMPT = ["_docs/_LICENSE.md", "_docs/_README.md"]
+
+HTML_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+<link rel="stylesheet preload" as="style" href="/styles.css">
+<script src="/script.js"></script>
+</head>
+<body>
+<div id="splash"></div>
+<main>
+<article id="content">
+{}
+</article>
+<nav id="sidebar">
+</nav>
+</main>
+<footer id="footer">
+</footer>
+</body>
+</html>"""
+
+VARS = markdown_vars.Vars
+
+def md_html(fin, fout, hout=None):
+    with open(fin, "r") as fin, open(fout, "w") as fout:
+        tpl_str = fin.read()
+        for var in tuple(i for i in dir(VARS) if not i.startswith("__")):
+            tpl_str = tpl_str.replace(f"${{{var}}}", str(getattr(VARS, var)))
+        fout.write(tpl_str)
+
+        if hout:
+            with open(hout, "w") as hout:
+                headers = {"accept": "application/vnd.github.v3+json"}
+                data = {"text": tpl_str}
+                md = str(
+                    httpx.post("https://api.github.com/markdown", headers=headers, json=data).content,
+                    encoding="utf-8"
+                )
+
+                md_repl = [
+                    [
+                        '[ ]',
+                        '<input type="checkbox" disabled="">'
+                    ],
+                    [
+                        '[x]',
+                        '<input type="checkbox" disabled="" checked="">'
+                    ],
+                    [
+                        '<link href="/github-markdown-css/github-css.css" rel="stylesheet"/>',
+                        ''
+                    ],
+                    [
+                        "user-content-",
+                        ""
+                    ]
+                ]
+
+                for o, n in md_repl:
+                    md = md.replace(o, n)
+
+                hout.write(HTML_TEMPLATE.format(md))
+
+@click.command()
+@click.option('-g', '--git', is_flag=True)
+def main(git: bool):
+    for tpl in list(Path("./_docs").rglob("_*.md")):
+        spl = str(tpl).split("/")
+        file = os.path.join(*spl[:-1], spl[-1][1:].split(".")[0])[1:]
+        RM = spl[-1][1:].split(".")[0] == "README"
+        if str(tpl) not in HTML_EXEMPT:
+            if RM:
+                hout = os.path.join(*spl[:-1], 'index.html')
+            else:
+                hout = f'{file}.html'
+        else:
+            hout = None
+        md_html(tpl, f'{file}.md', hout)
+
+    if git:
+        run("git add .")
+        run("git commit -am 'whi~nyaan commits!'")
+        run("git push")
+
+if __name__ == "__main__":
+    main()

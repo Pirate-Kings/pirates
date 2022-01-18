@@ -114,6 +114,7 @@ h1 {
 
 h2 {
     font-size: 1.75em;
+    line-height: 1.25em;
 }
 
 h3 {
@@ -863,22 +864,26 @@ blockquote {
     align-content: center;
 }
 
-#main {
+#list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
 @media (max-width: 1000px) {
-    #main {
+    #list {
         grid-template-columns: repeat(1, 1fr);
     }
 }
 
-#main>div {
+#list>div {
     background-color: #262626;
     margin: 1em;
     padding: 1em;
     border-left: .325em solid #3c3c3c;
+}
+
+#list>div h3 {
+    margin-bottom: .5em;
 }
 
 .rps {
@@ -908,6 +913,13 @@ blockquote {
     margin-top: 4px;
 }
 
-#main > div h3 {
-    margin-bottom: .5em;
+#splash {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: #0f0f0f;
+    overflow-x: hidden;
 }
