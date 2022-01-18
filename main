@@ -82,7 +82,7 @@ def md_html(fin, fout, hout=None):
 def main(git: bool):
     for tpl in list(Path("./_docs").rglob("_*.md")):
         spl = str(tpl).split("/")
-        file = os.path.join(*spl[:-1], spl[-1][1:].split(".")[0])[1:]
+        file = os.path.join("site", *spl[1:-1], spl[-1][1:].split(".")[0])
         RM = spl[-1][1:].split(".")[0] == "README"
         if str(tpl) not in HTML_EXEMPT:
             if RM:

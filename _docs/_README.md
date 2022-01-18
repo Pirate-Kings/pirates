@@ -30,6 +30,7 @@
     </a>
 </p>
 <!-- About section. Preferrably 2-5 sentences long. -->
+
 ---
 
 <h4 align="center">
@@ -60,6 +61,6 @@ Check the [LICENSE](LICENSE.md) for more details.
 
 <sub>
     <i>
-        <b>NOTE:</b> If a reference or source material is not attributed properly or not at all, please kindly [raise an issue](https://github.com/${organization}/${repo_name}/issues/new) so I can properly give credit to their respective authors.
+        <b>NOTE:</b> If a reference or source material is not attributed properly or not at all, please kindly <a target="_blank" href="https://github.com/${organization}/${repo_name}/issues/new">raise an issue</a> so I can properly give credit to their respective authors.
     </i>
 </sub>

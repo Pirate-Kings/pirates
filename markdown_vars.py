@@ -3,7 +3,7 @@ from datetime import date
 
 
 def b64(name: str):
-    with open(f"./docs/assets/images/icons/{name}", "rb") as f:
+    with open(f"./site/assets/images/icons/{name}", "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
