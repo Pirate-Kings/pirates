@@ -923,3 +923,35 @@ blockquote {
     background-color: #0f0f0f;
     overflow-x: hidden;
 }
+
+#navbar {
+    z-index: 2;
+    background-color: #0f0f0f;
+    position: fixed;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-color: #1b1b1b;
+    padding-bottom: 10px;
+    padding-top: 0.6rem;
+    top: 0px;
+    display: none;
+    height: 5%;
+}
+
+#navbar svg {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+#navbar .sitename {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#navbar img {
+    height: 1.5rem;
+    margin-right: 2rem;
+    margin-left: 1.3rem;
+    min-width: 2rem;
+    vertical-align: top;
+}

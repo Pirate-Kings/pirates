@@ -98,6 +98,16 @@ function apps() {
     }
 }
 
+function openNav() {
+    const header = document.getElementById("main-toc")
+
+    if (header.style.display == "none") {
+        header.style.display = "block";
+    } else {
+        header.style.display = "none";
+    }
+}
+
 window.onload = function () {
     document.getElementById("head").innerHTML = `
     <meta charset="utf-8" />
@@ -134,13 +144,51 @@ window.onload = function () {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>`;
 
     document.getElementById("sidebar").innerHTML = `
-    <h1>Pirate Kings</h1>
+    <h1 id="title">Pirate Kings</h1>
     <div class="toc" id="main-toc">
     </div>
     <div class="toc">
         <ul id="index">
         </ul>
     </div>`
+    
+    const isMobile = navigator.userAgentData.mobile;
+
+    if (isMobile) {
+        document.getElementById("title").remove();
+        
+        const navbar = document.getElementById("navbar");
+        navbar.style.display = "block";
+        navbar.innerHTML = `
+        <div class="sidebar-button" onClick="openNav()">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon">
+                <path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" />    
+            </svg>
+            <img src="./assets/images/logo-transparent.png" />
+            <span class="sitename">Pirate Kings</span>
+        </div>`
+
+        const toc = document.getElementById("main-toc");
+        toc.setAttribute(
+            "style",
+            `
+                display: none;
+                border-right-style: solid;
+                border-right-color: #1b1b1b;
+                margin-left: 0.5rem;
+                height: 100%;
+                position: fixed;
+                width: 50%;
+                z-index: 1;
+                top: 5%;
+                left: 0;
+                background-color: #0f0f0f;
+                overflow-x: hidden;
+                transition' 0.5s;
+                padding-top: 60px;
+            `
+        )
+    }
 
     document.getElementById("main-toc").innerHTML = `
     <h2>Index</h2>
