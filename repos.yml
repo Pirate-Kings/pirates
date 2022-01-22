@@ -3,7 +3,7 @@ questionnaire:
 - What kind of media does your app download and/or give the users on-demand (streaming for anime)?
 - Can your app download the aforementioned media? How about giving it to the users on-demand?
 - What types of interface does your app use?
-- List the trackers your app uses.
+- List all the trackers your app uses.
 - Does your app gets some of the said media from a NSFW source?
 - Can your app be also used as a programming library?
 - Summarize what your app can do and some other niche features your app have.
@@ -83,3 +83,10 @@ repos:
   yukino:
     user: yukino-app
     release: true
+    clf:
+      os: [w, l, a]
+      k: [a, m]
+      c: [o]
+      i: [g]
+      f: [n]
+      fl: [p]
